@@ -4,6 +4,7 @@ var q;
 $("button").click(function () {
     q = $("#pokemon").val().toLowerCase();
     console.log("q: " + q);
+    $("#dataRow").html("");
     for (i = 0; i < Pokemon.length; i++) {
         if (q == Pokemon[i].toLowerCase()) {
 
@@ -12,12 +13,17 @@ $("button").click(function () {
                 method: "GET"
             }).then(function (response) {
                 console.log(response);
+                for (f = 0; f < response.data.length; f++) {
+                    $("#dataRow").append('<div class="col-3-md"><div class="card" id="' + f + '"><img src="' + response.data[f].images.fixed_height.url + '"></div></div>');
+
+
+                }
             });
             break;
 
         } else if (i === -1) {
             window.alert("Pokemon Not Found :(");
-         }
+        }
 
     };
 });
